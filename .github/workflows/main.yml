@@ -5,24 +5,18 @@ on:
     branches:
       - main 
 
-env:
-  AWS_REGION: ap-south-1
 
 jobs:
   terraform-apply:
     runs-on: ubuntu-latest
-   
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-          AWS-ACCESS-KEY-ID: ${{ secrets.AWS_ACCESS_KEY }}
-          Aws-Secret-Access-Key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          Aws-Region: ${{ env.AWS_REGION }}
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
@@ -32,12 +26,11 @@ jobs:
       working-directory: Main/
 
     - name: Plan Terraform
-      run: terraform plan 
+      run: terraform plan  
       working-directory: Main/
 
     - name: Apply Terraform
       run: terraform apply -auto-approve 
       working-directory: Main/
-
-  
+          
     
