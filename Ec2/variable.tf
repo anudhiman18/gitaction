@@ -1,29 +1,23 @@
 variable "instance_type" {
   type        = string
-  # default = "t2.micro"
+ 
 }
 variable "subnet_id" {
   type        = string
-  # default = "subnet-0962069167a59d185"
+
 }
 variable "ami" {
   type        = string
-  # default = "ami-0a5ac53f63249fba0"
-
 }
 
 variable "name" {
   type        = string
-  # default = "anu"
 }
 variable "owner" {
   type        = string
-  # default = "anu@cloudeq.com"
 }
 variable "purpose" {
-  type        = string
-  # default = "learning"
-  
+  type        = string  
 }
 
 
